@@ -39,15 +39,13 @@ const part2 = (rawInput) => {
     position++
   ) {
     let fuelUsePerPosition = 0;
-    input.forEach((crabPosposition) => {
-      let steps = Math.abs(crabPosposition - position);
+    input.forEach((crabPosition) => {
+      const steps = Math.abs(crabPosition - position);
       if (fuelUsePerStepsMap.has(steps)) {
         fuelUsePerPosition += fuelUsePerStepsMap.get(steps);
       } else {
-        let fuelUsePerSteps = 0;
-        for (let step = 1; step <= steps; step++) {
-          fuelUsePerSteps += step;
-        }
+        // gauss sum: n(n+1)/2
+        let fuelUsePerSteps = (steps * (steps + 1)) / 2;
         fuelUsePerStepsMap.set(steps, fuelUsePerSteps);
         fuelUsePerPosition += fuelUsePerSteps;
       }
